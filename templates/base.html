@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sahayak - Find Local Jobs{% endblock %}</title>
+    <!-- Fallback CSS 
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/fallback.css') }}" rel="stylesheet">
+    -->
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <header class="bg-white shadow-md">
+        <div class="max-w-6xl mx-auto flex justify-between items-center px-4 py-3 container">
+            <!-- Logo/Brand -->
+            <h1 class="text-xl md:text-2xl font-bold text-blue-600 tracking-tight">
+                <a href="{{ url_for('home') }}">Sahayak</a>
+            </h1>
+
+            <!-- Actions -->
+            <div class="flex items-center space-x-3">
+                <!-- Language Toggle -->
+                <button onclick="toggleLanguage()"
+                    class="px-3 py-1.5 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition bg-blue button">
+                    हिंदी / English
+                </button>
+
+                <!-- Create Job Button -->
+                <a href="{{ url_for('make_jobs') }}"
+                    class="px-3 py-1.5 text-sm font-medium bg-green-600 text-white rounded-lg hover:bg-green-700 transition bg-green button">
+                    + Create Job
+                </a>
+
+                <!-- My Jobs Button -->
+                <a href="{{ url_for('profile') }}"
+                    class="px-3 py-1.5 text-sm font-medium bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition bg-yellow button">
+                    My Profile
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 border-t mt-10">
+        <div class="max-w-6xl mx-auto px-4 py-6 text-center text-gray-600 text-sm">
+            © 2025 Sahayak. Built for local jobs in Chhattisgarh.
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

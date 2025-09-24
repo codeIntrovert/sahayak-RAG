@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-10">
+
+    <!-- Back button -->
+    <a href="{{ url_for('home') }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6">
+        ← Back to Jobs
+    </a>
+
+    <!-- Job Card -->
+    <div class="bg-white shadow rounded-xl p-6 border">
+        <h1 class="text-3xl font-bold text-gray-800 mb-3">{{ job.title }}</h1>
+
+        <div class="space-y-2 mb-6">
+            <p class="text-gray-700"><span class="font-semibold">Employer:</span> {{ job.employer }}</p>
+            <p class="text-gray-700"><span class="font-semibold">Location:</span> {{ job.location }}</p>
+            <p class="text-green-600 font-medium"><span class="font-semibold">Salary:</span> {{ job.salary }}</p>
+            <p class="text-gray-700"><span class="font-semibold">Phone:</span> {{ job.phone }}</p>
+        </div>
+
+        <!-- Apply button -->
+        <a href="tel:{{ job.phone }}"
+            class="block w-full text-center bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition">
+            Call Employer
+        </a>
+    </div>
+
+    <!-- Google Map Embed -->
+    <div class="mt-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-2">Location on Map</h2>
+        <iframe width="100%" height="300" style="border:0; border-radius: 0.5rem;" loading="lazy" allowfullscreen
+            src="https://www.google.com/maps?q={{ job.location | urlencode }}&output=embed">
+        </iframe>
+    </div>
+
+</div>
+{% endblock %}

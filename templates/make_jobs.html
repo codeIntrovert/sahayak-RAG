@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Post a Job - Sahayak{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-10">
+
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+        Post Your Job
+    </h1>
+
+    <form method="POST" action="{{ url_for('make_jobs') }}" class="bg-white shadow-lg rounded-xl p-6 space-y-5 border">
+
+        <!-- Job Title -->
+        <div>
+            <label class="block font-medium text-gray-700 mb-1">Job Title</label>
+            <input type="text" name="title" required
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        </div>
+
+        <!-- Employer -->
+        <div>
+            <label class="block font-medium text-gray-700 mb-1">Employer</label>
+            <input type="text" name="employer" required
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        </div>
+
+        <!-- Category -->
+        <div>
+            <label class="block font-medium text-gray-700 mb-1">Category</label>
+            <select name="category" required
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                <option value="" disabled selected>Select a category</option>
+                <option value="painting">Painting</option>
+                <option value="plumbing">Plumbing</option>
+                <option value="electrician">Electrician</option>
+                <option value="carpenter">Carpenter</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <!-- Location -->
+        <div>
+            <label class="block font-medium text-gray-700 mb-1">Location</label>
+            <input type="text" name="location" required
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        </div>
+
+        <!-- Salary -->
+        <div>
+            <label class="block font-medium text-gray-700 mb-1">Salary</label>
+            <input type="text" name="salary"
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        </div>
+
+        <!-- Phone -->
+        <div>
+            <label class="block font-medium text-gray-700 mb-1">Phone Number</label>
+            <input type="tel" name="phone" required
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        </div>
+
+        <!-- Description -->
+        <div>
+            <label class="block font-medium text-gray-700 mb-1">Description</label>
+            <textarea name="description" rows="4" required
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit"
+            class="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition">
+            Post Job
+        </button>
+    </form>
+
+</div>
+{% endblock %}

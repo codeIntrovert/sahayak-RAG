@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-10 container">
+    <h1 class="text-3xl md:text-4xl font-bold text-gray-800 text-center my-20 heading"
+        data-en="Find local jobs on Sahayak" data-hi="सहायक पर स्थानीय नौकरियां खोजें">
+        Find local jobs on Sahayak
+    </h1>
+
+    <form class="flex flex-col sm:flex-row gap-3 justify-center mb-10 search-form" method="GET" id="search-form">
+
+        <div class="relative w-full sm:w-2/3">
+            <input type="text" name="search" id="search-input" value="{{ search }}"
+                placeholder="Search for jobs (painting, plumbing, etc.)"
+                data-hi-placeholder="नौकरी खोजें (पेंटिंग, प्लंबिंग, आदि)"
+                class="w-full px-4 py-2 pr-12 border-4 border-indigo-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm search-input">
+
+            <button type="button" id="voice-search-btn"
+                class="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer" title="Search with voice">
+                <svg class="w-6 h-6 text-gray-500 hover:text-blue-600 transition-colors" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <button type="submit"
+            class="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition button bg-blue">
+            Search
+        </button>
+    </form>
+
+    <div class="job-listings grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 job-grid">
+        {% for job in jobs %}
+        <div class="cursor-pointer border rounded-xl bg-white shadow hover:shadow-lg transition 
+                    overflow-hidden job-card" onclick="location.href='/job/{{ job.id }}'">
+
+            <img src="{{ url_for('static', filename='images/' ~ job.category ~ '.jpg') }}" alt="{{ job.category }}"
+                class="w-full h-40 object-cover job-img">
+
+            <div class="p-5 job-info">
+                <h3 class="text-xl font-semibold text-gray-800 mb-2 job-title">{{ job.title }}</h3>
+                <p class="text-gray-600 job-employer">{{ job.employer }}</p>
+                <p class="text-gray-500 text-sm job-location">{{ job.location }}</p>
+                <p class="text-green-600 font-medium mt-2 job-salary">{{ job.salary }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchForm = document.getElementById('search-form');
+        const searchInput = document.getElementById('search-input');
+        const voiceSearchBtn = document.getElementById('voice-search-btn');
+        const micIcon = voiceSearchBtn.querySelector('svg');
+
+        // Check for MediaRecorder API support
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            console.warn("MediaRecorder is not supported by this browser.");
+            voiceSearchBtn.style.display = 'none';
+            return;
+        }
+
+        let mediaRecorder;
+        let audioChunks = [];
+        let isRecording = false;
+
+        voiceSearchBtn.addEventListener('click', async () => {
+            if (isRecording) {
+                mediaRecorder.stop();
+                isRecording = false;
+                micIcon.classList.remove('text-red-500');
+                searchInput.placeholder = 'Processing...';
+            } else {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+
+                    mediaRecorder.onstart = () => {
+                        audioChunks = [];
+                        isRecording = true;
+                        micIcon.classList.add('text-red-500');
+                        searchInput.placeholder = 'Listening... Speak now!';
+                    };
+
+                    mediaRecorder.ondataavailable = event => {
+                        audioChunks.push(event.data);
+                    };
+
+                    mediaRecorder.onstop = async () => {
+                        isRecording = false;
+                        micIcon.classList.remove('text-red-500');
+                        searchInput.placeholder = 'Transcribing...';
+
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                        const formData = new FormData();
+                        formData.append('audio_data', audioBlob);
+
+                        try {
+                            const response = await fetch('/transcribe', {
+                                method: 'POST',
+                                body: formData
+                            });
+
+                            if (!response.ok) {
+                                throw new Error('Server error during transcription.');
+                            }
+
+                            const data = await response.json();
+                            if (data.transcript) {
+                                searchInput.value = data.transcript;
+                                searchForm.submit(); // Submit the form with the new text
+                            } else {
+                                searchInput.placeholder = data.error || 'Transcription failed.';
+                            }
+                        } catch (error) {
+                            console.error('Error transcribing audio:', error);
+                            searchInput.placeholder = 'Error sending audio.';
+                        }
+                    };
+
+                    mediaRecorder.start();
+
+                } catch (err) {
+                    console.error('Error accessing microphone:', err);
+                    searchInput.placeholder = 'Microphone access denied.';
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

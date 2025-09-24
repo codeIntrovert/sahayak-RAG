@@ -1,0 +1,184 @@
+/* === Fallback Styles if Tailwind Fails === */
+
+/* Global */
+body {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #f9fafb;
+    /* gray-50 */
+    color: #111827;
+    /* gray-900 */
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar */
+header {
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.75rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 a {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2563eb;
+    /* blue-600 */
+    text-decoration: none;
+}
+
+/* Buttons */
+button,
+a.button {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: background 0.2s ease;
+    cursor: pointer;
+}
+
+/* Blue Button */
+.bg-blue {
+    background: #2563eb;
+    color: #fff;
+}
+
+.bg-blue:hover {
+    background: #1d4ed8;
+}
+
+/* Green Button */
+.bg-green {
+    background: #16a34a;
+    color: #fff;
+}
+
+.bg-green:hover {
+    background: #15803d;
+}
+
+/* Yellow Button */
+.bg-yellow {
+    background: #f59e0b;
+    color: #fff;
+}
+
+.bg-yellow:hover {
+    background: #d97706;
+}
+
+/* Footer */
+footer {
+    background: #f3f4f6;
+    /* gray-100 */
+    border-top: 1px solid #e5e7eb;
+    margin-top: auto;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #4b5563;
+}
+
+/* Content Wrapper */
+main {
+    flex: 1;
+}
+
+/* The new parent container */
+.job-listings {
+    display: flex;
+    /* This makes the children (.job-card) go side-by-side */
+    flex-wrap: wrap;
+    /* This allows cards to wrap to the next line on smaller screens */
+    gap: 2rem;
+    /* This is the modern way to add space between cards (both rows and columns) */
+    justify-content: center;
+    /* Optional: Centers the cards within the container */
+    margin-top: 5%;
+    /* Move the margin-top here */
+}
+
+/* Your modified Job Card */
+.job-card {
+    background: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+
+    /* Adjust the width to account for the gap. 
+       flex-basis is often better than width in a flex context. */
+    flex-basis: 30%;
+    width: 30%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5%;
+
+}
+
+.job-card:hover {
+    transform: translateY(-3px);
+}
+
+.job-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+.job-card .content {
+    padding: 1rem;
+}
+
+.job-card h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem;
+}
+
+.job-card .meta {
+    font-size: 0.875rem;
+    color: #6b7280;
+    /* gray-500 */
+}
+
+.job-card .price {
+    margin-top: 0.5rem;
+    font-weight: 600;
+    color: #16a34a;
+}
+
+/* Search Bar */
+.search-container {
+    display: flex;
+    justify-content: center;
+
+}
+
+.search-container input {
+    flex: 1;
+    margin-top: 10%;
+    max-width: 400px;
+    padding: 0.6rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem 0 0 0.5rem;
+    outline: none;
+}
+
+.search-container button {
+    border-radius: 0 0.5rem 0.5rem 0;
+}
