@@ -1,19 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="max-w-6xl mx-auto px-4 py-10 container">
+
+    <div class="text-center mb-10">
+        <button onclick="switchLanguage('en')"
+            class="px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition">English</button>
+        <button onclick="switchLanguage('hi')"
+            class="px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-lg hover:bg-gray-300 transition">हिन्दी</button>
+    </div>
+
     <h1 class="text-3xl md:text-4xl font-bold text-gray-800 text-center my-20 heading"
-        data-en="Find local jobs on Sahayak" data-hi="सहायक पर स्थानीय नौकरियां खोजें">
+        data-en="Find local jobs on Sahayak" data-hi="सहायк पर स्थानीय नौकरियां खोजें">
         Find local jobs on Sahayak
     </h1>
 
     <form class="flex flex-col sm:flex-row gap-3 justify-center mb-10 search-form" method="GET" id="search-form">
-
         <div class="relative w-full sm:w-2/3">
             <input type="text" name="search" id="search-input" value="{{ search }}"
                 placeholder="Search for jobs (painting, plumbing, etc.)"
+                data-en-placeholder="Search for jobs (painting, plumbing, etc.)"
                 data-hi-placeholder="नौकरी खोजें (पेंटिंग, प्लंबिंग, आदि)"
                 class="w-full px-4 py-2 pr-12 border-4 border-indigo-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm search-input">
-
             <button type="button" id="voice-search-btn"
                 class="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer" title="Search with voice">
                 <svg class="w-6 h-6 text-gray-500 hover:text-blue-600 transition-colors" fill="none"
@@ -24,9 +31,9 @@
                 </svg>
             </button>
         </div>
-
         <button type="submit"
-            class="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition button bg-blue">
+            class="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition button bg-blue"
+            data-en="Search" data-hi="खोजें">
             Search
         </button>
     </form>
@@ -40,10 +47,14 @@
                 class="w-full h-40 object-cover job-img">
 
             <div class="p-5 job-info">
-                <h3 class="text-xl font-semibold text-gray-800 mb-2 job-title">{{ job.title }}</h3>
-                <p class="text-gray-600 job-employer">{{ job.employer }}</p>
-                <p class="text-gray-500 text-sm job-location">{{ job.location }}</p>
-                <p class="text-green-600 font-medium mt-2 job-salary">{{ job.salary }}</p>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2 job-title" data-en="{{ job.title }}"
+                    data-hi="{{ job.title_hi }}">{{ job.title }}</h3>
+                <p class="text-gray-600 job-employer" data-en="{{ job.employer }}" data-hi="{{ job.employer_hi }}">{{
+                    job.employer }}</p>
+                <p class="text-gray-500 text-sm job-location" data-en="{{ job.location }}"
+                    data-hi="{{ job.location_hi }}">{{ job.location }}</p>
+                <p class="text-green-600 font-medium mt-2 job-salary" data-en="{{ job.salary }}"
+                    data-hi="{{ job.salary_hi }}">{{ job.salary }}</p>
             </div>
         </div>
         {% endfor %}
@@ -52,6 +63,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // --- START: Voice Input Script ---
         const searchForm = document.getElementById('search-form');
         const searchInput = document.getElementById('search-input');
         const voiceSearchBtn = document.getElementById('voice-search-btn');
@@ -71,9 +83,6 @@
         voiceSearchBtn.addEventListener('click', async () => {
             if (isRecording) {
                 mediaRecorder.stop();
-                isRecording = false;
-                micIcon.classList.remove('text-red-500');
-                searchInput.placeholder = 'Processing...';
             } else {
                 try {
                     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -130,6 +139,28 @@
                 }
             }
         });
+        // --- END: Voice Input Script ---
     });
+
+    // --- Language Switching Script ---
+    function switchLanguage(lang) {
+        // Select all elements that have translations
+        const elementsToTranslate = document.querySelectorAll('[data-en]');
+
+        elementsToTranslate.forEach(el => {
+            const translation = (lang === 'hi') ? el.dataset.hi : el.dataset.en;
+            if (translation) {
+                el.innerText = translation;
+            }
+        });
+
+        // Handle the search input placeholder separately
+        const searchInput = document.getElementById('search-input');
+        if (lang === 'hi') {
+            searchInput.placeholder = searchInput.dataset.hiPlaceholder;
+        } else {
+            searchInput.placeholder = searchInput.dataset.enPlaceholder;
+        }
+    }
 </script>
 {% endblock %}

@@ -9,6 +9,8 @@ HINDI_TO_ENGLISH_MAP = {
     "rang saaz": "painter",
     "रंगसाज़": "painter",
     "plumber": "plumber",
+    "प्लम्बर":"plumber",
+    "प्लंबर":"plumber",
     "nal wala": "plumber",
     "nal saaz": "plumber",
     "नलसाज": "plumber",
