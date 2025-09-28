@@ -1,6 +1,6 @@
 # 🏆 Sahayak - Award Winning Blue Collar Job Platform
 
-**🎉 Winner of Uthaan 2025 POC Coding Competetion Award**
+**🎉 Winner of Uthaan 2025 POC Coding Competition Award**
 
 Sahayak is a revolutionary multilingual job portal specifically designed for blue-collar workers in India. Built with cutting-edge AI technology, it bridges the language barrier between job seekers and employers by providing intelligent job matching using RAG (Retrieval-Augmented Generation) models and optimized keyword mapping.
 
