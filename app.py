@@ -5,7 +5,7 @@ import torch
 import speech_recognition as sr
 import io 
 from pydub import AudioSegment 
-from map import HINDI_TO_ENGLISH_MAP
+from data.map import HINDI_TO_ENGLISH_MAP
 
 app = Flask(__name__)
 
@@ -23,7 +23,7 @@ def preprocess_query(query):
 
 # --- Load and embed jobs (no changes here) ---
 def load_jobs():
-    with open("jobs.json", "r", encoding="utf-8") as f:
+    with open("data/jobs.json", "r", encoding="utf-8") as f:
         return json.load(f)
 
 jobs = load_jobs()
