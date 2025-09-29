@@ -10,7 +10,7 @@ class JobSearchModel:
     
     def __init__(self):
         self.model = SentenceTransformer(Config.MODEL_NAME)
-        print("Multilingual Model loaded.")
+        print("Model loaded.")
         self.jobs = []
         self.job_embeddings = None
         self.load_jobs()
