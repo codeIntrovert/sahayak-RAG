@@ -156,11 +156,10 @@ Sahayak addresses the critical gap in India's blue-collar job market by:
 
 ## 🛣️ Roadmap
 
-- [ ] Mobile application development
 - [ ] Integration with popular job portals
 - [ ] Advanced analytics dashboard
 - [ ] Multi-regional language support
-- [ ] WhatsApp bot integration
+- [ ] SMS gateway for offline support
 - [ ] Skill assessment modules
 
 ## 🤝 Contributing
@@ -170,10 +169,6 @@ We welcome contributions to make Sahayak even better! Please feel free to:
 1. Fork the repository
 2. Create a feature branch
 3. Submit a pull request
-
-## 📞 Contact
-
-For more information about Sahayak or collaboration opportunities, please reach out to our development team.
 
 ---
 
