@@ -48,7 +48,7 @@ Sahayak is a revolutionary multilingual job portal specifically designed for blu
 
 ### Frontend
 
-- **Jinja3 templates** - Responsive web design
+- **Jinja2 templates** - Responsive web design
 - **JavaScript** - Interactive user interface
 - **Tailwind play CDN** - Modern UI components
 
@@ -169,6 +169,7 @@ We welcome contributions to make Sahayak even better! Please feel free to:
 1. Fork the repository
 2. Create a feature branch
 3. Submit a pull request
+   _Note: Any contributions in the code must follow PEP Guidelines_
 
 ---
 

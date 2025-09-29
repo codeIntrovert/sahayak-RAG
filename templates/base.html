@@ -19,7 +19,7 @@
         <div class="max-w-6xl mx-auto flex justify-between items-center px-4 py-3 container">
             <!-- Logo/Brand -->
             <h1 class="text-xl md:text-2xl font-bold text-blue-600 tracking-tight">
-                <a href="{{ url_for('home') }}">Sahayak</a>
+                <a href="{{ url_for('main.home') }}">Sahayak</a>
             </h1>
 
             <!-- Actions -->
@@ -31,13 +31,13 @@
                 </button>
 
                 <!-- Create Job Button -->
-                <a href="{{ url_for('make_jobs') }}"
+                <a href="{{ url_for('make_jobs.make_jobs') }}"
                     class="px-3 py-1.5 text-sm font-medium bg-green-600 text-white rounded-lg hover:bg-green-700 transition bg-green button">
                     + Create Job
                 </a>
 
                 <!-- My Jobs Button -->
-                <a href="{{ url_for('profile') }}"
+                <a href="{{ url_for('profile.profile') }}"
                     class="px-3 py-1.5 text-sm font-medium bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition bg-yellow button">
                     My Profile
                 </a>
