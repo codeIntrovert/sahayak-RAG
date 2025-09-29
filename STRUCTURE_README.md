@@ -28,34 +28,39 @@ sahayak-RAG/
 ## Components Description
 
 ### `app.py`
+
 - Main application entry point
 - Initializes Flask app and registers all blueprints
 - Minimal and clean
 
 ### `config.py`
+
 - Centralized configuration management
 - Contains all application settings
 - Easy to modify for different environments
 
 ### `models.py`
+
 - `JobSearchModel` class handles all job-related operations
 - Encapsulates ML model loading and job search logic
 - Manages job data persistence
 - Provides clean interface for job operations
 
 ### `utils.py`
+
 - Contains utility functions like audio transcription
 - Separates helper functions from route logic
 - Reusable across different parts of the application
 
 ### `routes/` directory
+
 - Each route is in a separate file as a Flask Blueprint
 - **main.py**: Home page and search functionality
 - **job_detail.py**: Individual job detail pages
 - **make_jobs.py**: Job creation form and processing
 - **profile.py**: User profile and job management
 - **audio.py**: Audio transcription API endpoint
-- **__init__.py**: Registers all blueprints with the main app
+- ****init**.py**: Registers all blueprints with the main app
 
 ## Benefits of This Structure
 
@@ -86,6 +91,7 @@ To add a new route:
 4. The route will automatically be available in the application
 
 Example:
+
 ```python
 # routes/new_feature.py
 from flask import Blueprint, render_template
@@ -98,6 +104,7 @@ def new_feature():
 ```
 
 Then add to `routes/__init__.py`:
+
 ```python
 from .new_feature import new_feature_bp
 
