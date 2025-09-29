@@ -158,7 +158,7 @@ Sahayak addresses the critical gap in India's blue-collar job market by:
 
 - [ ] Integration with popular job portals
 - [ ] Advanced analytics dashboard
-- [ ] Multi-regional language support
+- [x] Multi-regional language support
 - [ ] SMS gateway for offline support
 - [ ] Skill assessment modules
 
