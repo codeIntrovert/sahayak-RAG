@@ -48,6 +48,15 @@ Sahayak is a revolutionary multilingual job portal specifically designed for blu
 
 ### Frontend
 
+#### Next.js Frontend (New!)
+
+- **Next.js 15+** - Modern React framework with App Router
+- **TypeScript** - Type-safe development
+- **Tailwind CSS 4** - Clean and artistic UI design
+- **React 19** - Latest React features with server components
+
+#### Legacy Flask Frontend
+
 - **Jinja2 templates** - Responsive web design
 - **JavaScript** - Interactive user interface
 - **Tailwind play CDN** - Modern UI components
@@ -56,16 +65,24 @@ Sahayak is a revolutionary multilingual job portal specifically designed for blu
 
 ```
 sahayak/
-├── app.py                 # Main Flask application
+├── app.py                 # Main Flask application (Backend)
 ├── requirements.txt       # Python dependencies
+├── routes/                # Flask API routes
+│   ├── api.py            # RESTful API for Next.js frontend
+│   └── ...               # Other Flask routes
 ├── data/
 │   ├── jobs.json         # Job database with Hindi/English
 │   └── map.py            # Hindi-English keyword mapping
-├── static/
+├── frontend/             # Next.js Frontend (NEW!)
+│   ├── app/              # Next.js pages
+│   ├── components/       # React components
+│   ├── lib/              # API client and utilities
+│   └── types/            # TypeScript types
+├── static/               # Static files for legacy frontend
 │   ├── css/              # Stylesheets
 │   ├── js/               # JavaScript files
 │   └── images/           # Category images
-└── templates/
+└── templates/            # Jinja2 templates for legacy frontend
     ├── base.html         # Base template
     ├── index.html        # Home page with search
     ├── job_detail.html   # Job details page
@@ -78,10 +95,11 @@ sahayak/
 ### Prerequisites
 
 - Python 3.8+
+- Node.js 18+ and npm (for Next.js frontend)
 - pip package manager
 - Internet connection (for AI model downloads)
 
-### Installation Steps
+### Backend Installation
 
 1. **Clone the repository**
 
@@ -90,20 +108,78 @@ git clone <repository-url>
 cd sahayak
 ```
 
-2. **Install dependencies**
+2. **Install Python dependencies**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. **Run the application**
+3. **Run the Flask backend**
 
 ```bash
 python app.py
 ```
 
-4. **Access the platform**
-   Open your browser and navigate to `http://localhost:5000`
+The backend API will be available at `http://localhost:5000`
+
+### Frontend Installation (Next.js)
+
+1. **Navigate to the frontend directory**
+
+```bash
+cd frontend
+```
+
+2. **Install Node.js dependencies**
+
+```bash
+npm install
+```
+
+3. **Start the Next.js development server**
+
+```bash
+npm run dev
+```
+
+4. **Access the application**
+   Open your browser and navigate to `http://localhost:3000`
+
+### Legacy Frontend (Jinja2)
+
+The legacy Jinja2 frontend is still accessible at `http://localhost:5000` when running the Flask backend.
+
+## 🎨 Using the New Next.js Frontend
+
+The new Next.js frontend provides a modern, visually impressive UI with:
+
+- **Beautiful gradients** and smooth animations
+- **Responsive design** for all screen sizes
+- **Fast performance** with React Server Components
+- **Type-safe** development with TypeScript
+- **Better UX** with loading states and error handling
+
+### Features
+
+1. **Job Search** - AI-powered semantic search with instant results
+2. **Job Details** - Rich job information with Google Maps integration
+3. **Create Jobs** - Intuitive form with validation
+4. **Profile** - Manage your job postings easily
+
+For detailed frontend documentation, see [frontend/README.md](frontend/README.md)
+
+
+```bash
+pip install -r requirements.txt
+```
+
+3. **Run the backend**
+
+```bash
+python app.py
+```
+
+Then follow the frontend installation steps above to run the Next.js frontend.
 
 ## 🎯 Core Functionality
 
