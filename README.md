@@ -56,6 +56,7 @@ Sahayak is a revolutionary multilingual job portal specifically designed for blu
 
 ```
 sahayak/
+|__ Dockerfile             # Build docker image
 ├── app.py                 # Main Flask application
 ├── requirements.txt       # Python dependencies
 ├── data/
@@ -86,8 +87,8 @@ sahayak/
 1. **Clone the repository**
 
 ```bash
-git clone <repository-url>
-cd sahayak
+git clone https://github.com/codeIntrovert/sahayak-RAG.git
+cd sahayak-RAG
 ```
 
 2. **Install dependencies**
@@ -104,6 +105,34 @@ python app.py
 
 4. **Access the platform**
    Open your browser and navigate to `http://localhost:5000`
+
+
+## **Installation steps using docker**
+
+1. **Clone the repository**
+
+```bash
+git clone -b dockerize https://github.com/ramimK0bir/sahayak-RAG.git
+cd sahayak-RAG
+```
+
+2. **Build docker image**
+```bash
+docker build -t sahayak-rag:0.0.1 .
+```
+
+3. **Run docker image**
+```bash
+docker run -p5000:5000 sahayak-rag:0.0.1
+```
+or 
+4. **Run docker image with persistent data folder**
+```bash
+docker run -v $(pwd)/data:/app/sahayak-RAG/data -p5000:5000 sahayak-rag:0.0.1
+```
+5. **Access the platform**
+   Open your browser and navigate to [localhost:5000](http://localhost:5000)
+
 
 ## 🎯 Core Functionality
 
